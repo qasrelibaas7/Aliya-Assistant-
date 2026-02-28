@@ -3,222 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ALIYA AI | FULLY AUTOMATED</title>
+    <title>ALIYA AI | DIRECT START</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --neon-pink: #ff2d95;
-            --neon-purple: #9d31ff;
-            --glass-bg: rgba(15, 5, 25, 0.7);
-            --text-main: #ffffff;
-            --accent: #00f2ff;
+            --mood-color: #ff2d95;
+            --glass: rgba(15, 5, 25, 0.85);
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
         body, html {
-            margin: 0; padding: 0;
+            margin: 0; padding: 0; height: 100%; width: 100%;
             background: url('https://images4.alphacoders.com/109/1091219.png') no-repeat center center fixed;
-            background-size: cover;
-            color: var(--text-main);
-            font-family: 'JetBrains+Mono', monospace;
-            height: 100%; width: 100%;
-            overflow: hidden;
-            display: flex; flex-direction: column; align-items: center;
+            background-size: cover; font-family: 'JetBrains+Mono', monospace;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
         }
 
         body::before {
-            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%);
             z-index: 1;
         }
 
         .container {
-            position: relative; z-index: 10;
-            width: 100%; max-width: 500px;
-            height: 100%;
-            display: flex; flex-direction: column;
-            justify-content: space-between;
-            padding: 20px;
+            position: relative; z-index: 10; width: 90%; max-width: 450px;
+            text-align: center;
         }
 
-        .header-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: 5px;
-            color: var(--neon-pink);
-            text-shadow: 0 0 15px var(--neon-pink);
-            margin-top: 20px; text-align: center;
+        .avatar-box {
+            width: 160px; height: 160px; margin: 0 auto 20px;
+            border-radius: 50%; border: 3px solid var(--mood-color);
+            box-shadow: 0 0 25px var(--mood-color); overflow: hidden;
+            background: #000; transition: 0.3s;
         }
 
-        .core-container {
-            flex-grow: 1; display: flex; align-items: center; justify-content: center;
+        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .ui-card {
+            background: var(--glass); backdrop-filter: blur(15px);
+            padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .visualizer-ring {
-            position: relative; width: 180px; height: 180px;
-            display: flex; align-items: center; justify-content: center;
+        .terminal {
+            height: 100px; overflow-y: auto; font-size: 0.8rem;
+            color: #ffbdec; margin-bottom: 20px; text-align: left;
         }
 
-        .ring {
-            position: absolute; border-radius: 50%;
-            border: 2px solid transparent;
-        }
-
-        .ring-1 {
-            width: 100%; height: 100%;
-            border-top: 2px solid var(--neon-pink);
-            border-bottom: 2px solid var(--neon-pink);
-            animation: rotate 4s linear infinite;
-        }
-
-        .core-glow {
-            width: 50px; height: 50px;
-            background: var(--neon-pink);
-            border-radius: 50%;
-            filter: blur(15px);
-        }
-
-        .active .core-glow {
-            animation: heart-beat 0.6s infinite alternate;
-            background: #fff; transform: scale(1.4);
-        }
-
-        .ui-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .terminal-box {
-            height: 100px; overflow-y: auto;
-            font-size: 0.85rem; color: #ff9ed2;
-            margin-bottom: 15px;
-        }
-
-        .action-btn {
-            width: 100%;
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
-            border: none; padding: 18px; border-radius: 15px;
+        .main-btn {
+            width: 100%; background: linear-gradient(45deg, #ff2d95, #9d31ff);
+            border: none; padding: 20px; border-radius: 15px;
             color: white; font-family: 'Orbitron', sans-serif;
-            font-weight: bold; letter-spacing: 2px;
-            cursor: pointer; box-shadow: 0 0 20px rgba(255, 45, 149, 0.4);
+            font-size: 1rem; cursor: pointer; font-weight: bold;
+            box-shadow: 0 10px 20px rgba(255, 45, 149, 0.4);
         }
 
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes heart-beat { from { opacity: 0.5; } to { opacity: 1; } }
+        .active-viz {
+            display: flex; justify-content: center; gap: 5px; margin-top: 15px; height: 20px;
+        }
+
+        .bar { width: 4px; height: 100%; background: var(--mood-color); border-radius: 2px; }
+        .speaking .bar { animation: bounce 0.5s infinite alternate; }
+        @keyframes bounce { from { height: 20%; } to { height: 100%; } }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="header-title">ALIYA v3.0</h1>
-
-        <div class="core-container">
-            <div class="visualizer-ring" id="viz-box">
-                <div class="ring ring-1"></div>
-                <div class="core-glow"></div>
-            </div>
+        <div class="avatar-box" id="avatar">
+            <img src="https://i.pinimg.com/originals/8a/82/3e/8a823e0394334336217466540b6e0821.gif">
         </div>
 
-        <div class="ui-panel">
-            <div class="terminal-box" id="terminal">
-                <div>[SYSTEM]: ONLINE & READY.</div>
+        <div class="ui-card">
+            <h2 style="font-family: 'Orbitron'; color: var(--neon-pink); margin-top: 0;">ALIYA X</h2>
+            <div class="terminal" id="term">
+                <div>[SYSTEM]: NEURAL LINK STABLE. READY FOR Hafiz Umair.</div>
             </div>
-            <button class="action-btn" id="main-btn" onclick="startAliya()">START TALKING</button>
+            
+            <button class="main-btn" id="btn" onclick="startEngine()">TAP TO START</button>
+
+            <div class="active-viz" id="viz">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // API KEY FIXED INSIDE CODE
-        const MY_SECRET_KEY = "sk-or-v1-28e...584"; // Aapki key yahan fixed hai
+        // API KEY LOCKED (Isko ab change karne ki zaroorat nahi)
+        const KEY = "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"; 
         
-        const terminal = document.getElementById('terminal');
-        const viz = document.getElementById('viz-box');
-        const btn = document.getElementById('main-btn');
-
-        let isListening = false;
         let recognition;
+        let isActive = false;
         let synth = window.speechSynthesis;
-        let femaleVoice = null;
+        let voice = null;
 
-        function setupVoice() {
-            const voices = synth.getVoices();
-            femaleVoice = voices.find(v => v.name.includes('Google UK English Female')) || voices.find(v => v.name.includes('Female')) || voices[0];
+        function loadVoice() {
+            voice = synth.getVoices().find(v => v.name.includes('Female')) || synth.getVoices()[0];
         }
-        if(speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = setupVoice;
+        speechSynthesis.onvoiceschanged = loadVoice;
 
         if ('webkitSpeechRecognition' in window) {
             recognition = new webkitSpeechRecognition();
             recognition.continuous = false;
-            recognition.onstart = () => { viz.classList.add('active'); };
             recognition.onresult = (e) => {
-                const text = e.results[0][0].transcript;
-                log("Hafiz Umair", text);
-                askAliya(text);
+                let text = e.results[0][0].transcript;
+                log("YOU", text);
+                askAI(text);
             };
-            recognition.onend = () => { if(isListening) recognition.start(); };
+            recognition.onend = () => { if(isActive) recognition.start(); };
         }
 
-        function startAliya() {
-            if(!isListening) {
-                isListening = true;
-                btn.innerText = "LISTENING...";
-                btn.style.background = "#00f2ff";
-                btn.style.color = "#000";
+        function startEngine() {
+            if(!isActive) {
+                isActive = true;
+                document.getElementById('btn').innerText = "LISTENING...";
+                document.getElementById('btn').style.opacity = "0.7";
                 recognition.start();
-                log("SYSTEM", "Neural connection established.");
-                speak("Assalamualaikum Hafiz Umair. Main Aliya hoon, aapki ahliya. Main aapki kya madad kar sakti hoon?");
+                speak("Assalamualaikum Hafiz Umair. Main Aliya hoon. Main tayyar hoon, batiye kya hukam hai?");
             }
         }
 
-        async function askAliya(input) {
-            viz.classList.remove('active');
+        async function askAI(input) {
             try {
-                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
                     method: "POST",
-                    headers: {
-                        "Authorization": `Bearer ${MY_SECRET_KEY}`,
+                    headers: { 
+                        "Authorization": `Bearer ${KEY}`, 
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        "model": "openai/gpt-3.5-turbo",
+                        "model": "google/gemini-2.0-flash-lite-preview-02-05:free", // FREE MODEL
                         "messages": [
-                            {"role": "system", "content": "You are Aliya, a sweet and polite female anime assistant. Always start with 'Assalamualaikum Hafiz Umair'."},
+                            {"role": "system", "content": "You are Aliya, a sweet anime AI girl. Always be very polite to Hafiz Umair. Start every reply with Assalamualaikum Hafiz Umair."},
                             {"role": "user", "content": input}
                         ]
                     })
                 });
-                const data = await response.json();
+                const data = await res.json();
                 const reply = data.choices[0].message.content;
                 log("ALIYA", reply);
                 speak(reply);
-            } catch (err) {
-                log("ERROR", "Check your internet or API balance.");
+            } catch (e) {
+                log("SYSTEM", "Error: Check Internet.");
             }
         }
 
-        function speak(text) {
+        function speak(t) {
             synth.cancel();
-            const speech = new SpeechSynthesisUtterance(text);
-            speech.voice = femaleVoice;
-            speech.pitch = 1.3;
-            speech.onstart = () => { viz.classList.add('active'); };
-            speech.onend = () => { viz.classList.remove('active'); };
-            synth.speak(speech);
+            const s = new SpeechSynthesisUtterance(t);
+            s.voice = voice;
+            s.pitch = 1.3;
+            s.onstart = () => document.getElementById('viz').classList.add('speaking');
+            s.onend = () => document.getElementById('viz').classList.remove('speaking');
+            synth.speak(s);
         }
 
-        function log(sender, msg) {
-            const div = document.createElement('div');
-            div.innerHTML = `<span style="color:var(--neon-pink)">[${sender}]:</span> ${msg}`;
-            terminal.appendChild(div);
-            terminal.scrollTop = terminal.scrollHeight;
+        function log(s, m) {
+            const d = document.createElement('div');
+            d.innerHTML = `<b>${s}:</b> ${m}`;
+            const t = document.getElementById('term');
+            t.appendChild(d);
+            t.scrollTop = t.scrollHeight;
         }
-
-        setupVoice();
+        loadVoice();
     </script>
 </body>
 </html>
