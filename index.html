@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ALIYA AI | ADVANCED NEURAL INTERFACE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #ff2d95;
+            --neon-purple: #9d31ff;
+            --glass-bg: rgba(15, 5, 25, 0.7);
+            --text-main: #ffffff;
+            --accent: #00f2ff;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            margin: 0; padding: 0;
+            background: url('https://images4.alphacoders.com/109/1091219.png') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--text-main);
+            font-family: 'JetBrains+Mono', monospace;
+            height: 100%; width: 100%;
+            overflow: hidden;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        /* Deep Neural Overlay */
+        body::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .container {
+            position: relative; z-index: 10;
+            width: 100%; max-width: 500px;
+            height: 100%;
+            display: flex; flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .header-section { margin-top: 10px; text-align: center; }
+
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 5px;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--neon-pink);
+            margin: 0;
+        }
+
+        .status-badge {
+            font-size: 0.6rem; color: var(--accent);
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-top: 5px; opacity: 0.8;
+        }
+
+        /* Advanced Core Visualizer */
+        .core-container {
+            flex-grow: 1; display: flex; align-items: center; justify-content: center;
+        }
+
+        .visualizer-ring {
+            position: relative; width: 180px; height: 180px;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .ring {
+            position: absolute; border-radius: 50%;
+            border: 2px solid transparent;
+        }
+
+        .ring-1 {
+            width: 100%; height: 100%;
+            border-top: 2px solid var(--neon-pink);
+            border-bottom: 2px solid var(--neon-pink);
+            animation: rotate 4s linear infinite;
+        }
+
+        .ring-2 {
+            width: 80%; height: 80%;
+            border-left: 1px dashed var(--accent);
+            border-right: 1px dashed var(--accent);
+            animation: rotate-rev 3s linear infinite;
+        }
+
+        .core-glow {
+            width: 50px; height: 50px;
+            background: var(--neon-pink);
+            border-radius: 50%;
+            filter: blur(15px);
+            transition: all 0.3s ease;
+        }
+
+        .active .core-glow {
+            transform: scale(1.5);
+            background: #fff;
+            filter: blur(25px);
+            animation: heart-beat 0.6s infinite alternate;
+        }
+
+        /* Glass Terminal */
+        .ui-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .terminal-box {
+            height: 120px; overflow-y: auto;
+            font-size: 0.85rem; line-height: 1.4;
+            color: #ff9ed2;
+        }
+
+        .input-group {
+            display: flex; flex-direction: column; gap: 10px; margin-top: 15px;
+        }
+
+        input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 12px; border-radius: 12px;
+            color: #fff; text-align: center; font-family: inherit;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            border: none; padding: 15px; border-radius: 12px;
+            color: white; font-family: 'Orbitron', sans-serif;
+            font-weight: bold; letter-spacing: 2px;
+            cursor: pointer; transition: 0.3s;
+        }
+
+        .action-btn:active { transform: scale(0.95); }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes rotate-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        @keyframes heart-beat { from { opacity: 0.5; } to { opacity: 1; } }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header-section">
+            <h1 class="header-title">ALIYA v2.0</h1>
+            <div class="status-badge" id="status">NEURAL LINK: READY</div>
+        </div>
+
+        <div class="core-container">
+            <div class="visualizer-ring" id="viz-box">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="core-glow"></div>
+            </div>
+        </div>
+
+        <div class="ui-panel">
+            <div class="terminal-box" id="terminal">
+                <div>[SYSTEM]: AWAITING INITIALIZATION...</div>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="api-key" placeholder="ENTER OPENROUTER API KEY">
+                <button class="action-btn" id="main-btn" onclick="handleAuth()">INITIALIZE ALIYA</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const terminal = document.getElementById('terminal');
+        const status = document.getElementById('status');
+        const viz = document.getElementById('viz-box');
+        const btn = document.getElementById('main-btn');
+        const keyInput = document.getElementById('api-key');
+
+        let isListening = false;
+        let recognition;
+        let synth = window.speechSynthesis;
+        let femaleVoice = null;
+
+        // Load saved settings
+        window.onload = () => {
+            const saved = localStorage.getItem('aliya_key');
+            if(saved) {
+                keyInput.value = saved;
+                log("SYSTEM", "PREVIOUS LINK RESTORED.");
+            }
+            setupVoice();
+        };
+
+        function setupVoice() {
+            const voices = synth.getVoices();
+            femaleVoice = voices.find(v => v.name.includes('Female') || v.name.includes('Google UK English Female')) || voices[0];
+        }
+        if(speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = setupVoice;
+
+        // Speech Recognition
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.onstart = () => { updateStatus("LISTENING..."); viz.classList.add('active'); };
+            recognition.onresult = (e) => {
+                const text = e.results[0][0].transcript;
+                log("USER", text);
+                askAliya(text);
+            };
+            recognition.onend = () => { if(isListening) recognition.start(); };
+        }
+
+        function handleAuth() {
+            const key = keyInput.value.trim();
+            if(!key) return alert("Enter API Key first!");
+            localStorage.setItem('aliya_key', key);
+            
+            if(!isListening) {
+                isListening = true;
+                btn.innerText = "TERMINATE LINK";
+                btn.style.background = "#ff4b2b";
+                recognition.start();
+            } else {
+                location.reload(); // Hard stop
+            }
+        }
+
+        async function askAliya(input) {
+            updateStatus("PROCESSING...");
+            viz.classList.remove('active');
+
+            try {
+                const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${keyInput.value.trim()}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "model": "openai/gpt-3.5-turbo",
+                        "messages": [
+                            {"role": "system", "content": "You are Aliya, a sweet and highly intelligent female anime assistant. Keep replies concise and human-like."},
+                            {"role": "user", "content": input}
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                const reply = "Assalamualaikum Hafiz Umair. " + data.choices[0].message.content;
+                
+                log("ALIYA", reply);
+                speak(reply);
+            } catch (err) {
+                log("ERROR", "CONNECTION FAILED.");
+            }
+        }
+
+        function speak(text) {
+            synth.cancel();
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.voice = femaleVoice;
+            speech.pitch = 1.2;
+            speech.onstart = () => { viz.classList.add('active'); updateStatus("SPEAKING..."); };
+            speech.onend = () => { viz.classList.remove('active'); updateStatus("IDLE"); };
+            synth.speak(speech);
+        }
+
+        function log(sender, msg) {
+            const div = document.createElement('div');
+            div.innerHTML = `<span style="color:var(--neon-pink)">[${sender}]:</span> ${msg}`;
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        function updateStatus(txt) { status.innerText = `NEURAL LINK: ${txt}`; }
+
+    </script>
+</body>
+</html>
